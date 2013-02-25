@@ -9,7 +9,6 @@
 # Usage:                                                                      #
 # - volume.sh plus                                                            #
 # - volume.sh min                                                             #
-# - volume.sh set 75                                                          #
 # - volume.sh get                                                             #
 # - volume.sh mute                                                            #
 # - volume.sh help                                                            #
@@ -42,7 +41,7 @@ function volume_set() {
         VOL_NEW=$((VOL_MAX))
     fi
     pactl set-sink-volume $SINK_NAME `printf "0x%X" $VOL_NEW`
-	bar
+	volume_bar
 }
 
 function volume_mute() {
@@ -51,7 +50,7 @@ function volume_mute() {
     elif [ $MUTE_STATE = yes ]; then
         pactl set-sink-mute $SINK_NAME 0
     fi
-	bar
+	volume_bar
 }
 
 function volume_bar() {
@@ -95,16 +94,13 @@ case "$1" in
     get)
         volume_bar
     ;;
-    set)
-        volume_set $2
-    ;;
     mute)
         volume_mute
     ;;
     help|-h|--help)
         echo ""
         echo "Usage:"
-        echo "    sh $0 [get|set|plus|minus|mute] [<percent>]"
+        echo "    sh $0 [get|plus|minus|mute]"
         echo ""
 
         exit 0      
