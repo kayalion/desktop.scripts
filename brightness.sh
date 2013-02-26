@@ -5,7 +5,7 @@
 #                                                                             #
 # MacBook Brightness Control:                                                 #
 # Script to control the display and keyboard brightness of a MacBook running  #
-# Ubuntu Linux.                                                                #
+# Ubuntu Linux.                                                               #
 #                                                                             #
 # Usage:                                                                      #
 # - brightness.sh keyboard plus                                               #
