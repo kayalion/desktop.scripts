@@ -39,11 +39,11 @@ DISPLAY_STEPS=8
 ###############################################################################
 
 function keyboard() {
-	KEYBOARD_STEP=$((KEYBOARD_MAX / KEYBOARD_STEPS))
-	KEYBOARD_LEVEL=`cat $KEYBOARD_FILE`
+    KEYBOARD_STEP=$((KEYBOARD_MAX / KEYBOARD_STEPS))
+    KEYBOARD_LEVEL=`cat $KEYBOARD_FILE`
     KEYBOARD_LEVEL=$[(($KEYBOARD_LEVEL * 100) / 255)]
 
-	case "$1" in
+    case "$1" in
         plus)
             keyboard_set $((KEYBOARD_LEVEL + KEYBOARD_STEP))
         ;;
@@ -52,19 +52,19 @@ function keyboard() {
         ;;
         get)
             keyboard_bar
-		;;
+        ;;
         set)
             keyboard_set $2
-		;;
-	esac
+        ;;
+    esac
 }
 
 function keyboard_set() {
-	KEYBOARD_LEVEL=$1
-	if [ $KEYBOARD_LEVEL -lt 0 ]; then
+    KEYBOARD_LEVEL=$1
+    if [ $KEYBOARD_LEVEL -lt 0 ]; then
         KEYBOARD_LEVEL=0
-	elif [ $KEYBOARD_LEVEL -gt $KEYBOARD_MAX ]; then
-		KEYBOARD_LEVEL=$KEYBOARD_MAX
+    elif [ $KEYBOARD_LEVEL -gt $KEYBOARD_MAX ]; then
+        KEYBOARD_LEVEL=$KEYBOARD_MAX
     fi
     echo "$[(($KEYBOARD_LEVEL * 255) / 100) % 256]" > $KEYBOARD_FILE
     keyboard_bar
@@ -93,34 +93,34 @@ function keyboard_bar() {
 ###############################################################################
 
 function display() {
-	DISPLAY_STEP=$((DISPLAY_MAX / DISPLAY_STEPS))
-	DISPLAY_LEVEL=`cat $DISPLAY_FILE`
+    DISPLAY_STEP=$((DISPLAY_MAX / DISPLAY_STEPS))
+    DISPLAY_LEVEL=`cat $DISPLAY_FILE`
     DISPLAY_LEVEL=$[(($DISPLAY_LEVEL * 100) / 4882)]
 
-	case "$1" in
+    case "$1" in
         plus)
-        	display_set $((DISPLAY_LEVEL + DISPLAY_STEP))
+            display_set $((DISPLAY_LEVEL + DISPLAY_STEP))
         ;;
         min)
-        	display_set $((DISPLAY_LEVEL - DISPLAY_STEP))
+            display_set $((DISPLAY_LEVEL - DISPLAY_STEP))
         ;;
         get)
             display_bar
-		;;
+        ;;
         set)
             display_set $2
-		;;
-	esac
+        ;;
+    esac
 }
 
 function display_set() {
-	DISPLAY_LEVEL=$1
-	if [ $DISPLAY_LEVEL -lt 0 ]; then
+    DISPLAY_LEVEL=$1
+    if [ $DISPLAY_LEVEL -lt 0 ]; then
         DISPLAY_LEVEL=0
-	elif [ $DISPLAY_LEVEL -gt $DISPLAY_MAX ]; then
-		DISPLAY_LEVEL=$DISPLAY_MAX
+    elif [ $DISPLAY_LEVEL -gt $DISPLAY_MAX ]; then
+        DISPLAY_LEVEL=$DISPLAY_MAX
     fi
-	echo "$[(($DISPLAY_LEVEL * 4882) / 100) % 4883]" > $DISPLAY_FILE
+    echo "$[(($DISPLAY_LEVEL * 4882) / 100) % 4883]" > $DISPLAY_FILE
     display_bar
 }
 
@@ -148,17 +148,17 @@ function display_bar() {
 
 case $1 in
    display)
-		display $2 $3		
+       display $2 $3        
    ;;
    keyboard)
-		keyboard $2 $3
+       keyboard $2 $3
    ;;
    help|-h|--help)
-        echo ""
-        echo "Usage:"
-        echo "    sh $0 [display|keyboard] [get|set|plus|minus] [<percent>]"
-        echo ""
+       echo ""
+       echo "Usage:"
+       echo "    sh $0 [display|keyboard] [get|set|plus|minus] [<percent>]"
+       echo ""
 
-        exit 0      
+       exit 0      
    ;;
 esac

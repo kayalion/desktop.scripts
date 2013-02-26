@@ -41,7 +41,7 @@ function volume_set() {
         VOL_NEW=$((VOL_MAX))
     fi
     pactl set-sink-volume $SINK_NAME `printf "0x%X" $VOL_NEW`
-	volume_bar
+    volume_bar
 }
 
 function volume_mute() {
@@ -50,7 +50,7 @@ function volume_mute() {
     elif [ $MUTE_STATE = yes ]; then
         pactl set-sink-mute $SINK_NAME 0
     fi
-	volume_bar
+    volume_bar
 }
 
 function volume_bar() {
@@ -89,7 +89,7 @@ case "$1" in
         volume_set $((VOL_NOW + VOL_STEP))
     ;;
     minus|min)
-	    volume_set $((VOL_NOW - VOL_STEP))
+        volume_set $((VOL_NOW - VOL_STEP))
     ;;
     get)
         volume_bar

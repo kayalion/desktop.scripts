@@ -24,9 +24,9 @@ export XAUTHORITY=/home/kayalion/.Xauthority
 STATUS=`cat $DISPLAY_DIR/status`
 
 if [ "${STATUS}" = disconnected ]; then
-	/usr/bin/xrandr --auto
+    /usr/bin/xrandr --auto
 elif [ "${STATUS}" = connected ]; then                                    
     /usr/bin/xrandr --output HDMI1 --auto --right-of LVDS1               
 else 
-	/usr/bin/xrandr --auto                                
+    /usr/bin/xrandr --auto                                
 fi
